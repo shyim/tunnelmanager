@@ -1,4 +1,4 @@
-# tunnelmanager
+# sshtunnelmanager
 
 Simple GUI for SSH Tunnels
 
@@ -10,3 +10,5 @@ Simple GUI for SSH Tunnels
 # Building
 
 * Qt 5 is required
+
+![Windows](https://shyim.de/screenshots/TunnelManager_2017-12-10_21-54-52.png)
