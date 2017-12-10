@@ -11,13 +11,13 @@ NewEntry::NewEntry(QWidget *parent) :
     ui->labelError->setVisible(false);
 
     // debug
-    ui->lineName->setText("test");
-    ui->lineHost->setText("shyim.de");
+    ui->lineName->setText("");
+    ui->lineHost->setText("");
     ui->lineSshPort->setText("22");
-    ui->lineLocPort->setText("8555");
-    ui->lineUser->setText("root");
-    ui->lineExtIP->setText("127.0.0.1");
-    ui->lineExtPort->setText("8555");
+    ui->lineLocPort->setText("");
+    ui->lineUser->setText("");
+    ui->lineExtIP->setText("");
+    ui->lineExtPort->setText("");
 }
 
 NewEntry::~NewEntry()
