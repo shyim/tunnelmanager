@@ -11,4 +11,13 @@ Simple GUI for SSH Tunnels
 
 * Qt 5 is required
 
+## qmake
+
+Use [`qmake`](http://doc.qt.io/qt-5/qmake-manual.html) to generate a `Makefile` and use `make` to compile the project
+
+    $ qmake
+    $ make
+
+# Screenshots
 ![Windows](https://shyim.de/screenshots/TunnelManager_2017-12-10_21-54-52.png)
+
