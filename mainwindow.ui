@@ -45,14 +45,14 @@
       <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>Neuen Eintrag hinzufügen</string>
+         <string>New entry</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_2">
         <property name="text">
-         <string>Löschen</string>
+         <string>Delete</string>
         </property>
        </widget>
       </item>
@@ -87,36 +87,16 @@
    </property>
    <widget class="QMenu" name="menuStart">
     <property name="title">
-     <string>Start</string>
+     <string>File</string>
     </property>
     <addaction name="actionBeenden"/>
    </widget>
-   <widget class="QMenu" name="menuHilfe">
-    <property name="title">
-     <string>Hilfe</string>
-    </property>
-    <addaction name="action_ber_Qt"/>
-   </widget>
    <addaction name="menuStart"/>
-   <addaction name="menuHilfe"/>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionBeenden">
    <property name="text">
-    <string>Beenden</string>
-   </property>
-  </action>
-  <action name="action_ber_Qt">
-   <property name="text">
-    <string>Über Qt</string>
+    <string>Quit</string>
    </property>
   </action>
  </widget>

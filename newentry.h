@@ -13,7 +13,8 @@ class NewEntry : public QDialog
 
 public:
     explicit NewEntry(QWidget *parent = 0);
-    void accept();
+    void entryFailed(QString text);
+    void entrySuccess();
     ~NewEntry();
 
 private slots:
@@ -21,7 +22,7 @@ private slots:
     void on_buttonCancel_clicked();
 
 signals:
-    void newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
+    void newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort, bool startup);
 
 private:
     Ui::NewEntry *ui;
