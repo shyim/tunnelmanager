@@ -19,5 +19,4 @@ Use [`qmake`](http://doc.qt.io/qt-5/qmake-manual.html) to generate a `Makefile` 
     $ make
 
 # Screenshots
-![Windows](https://shyim.de/screenshots/TunnelManager_2017-12-10_21-54-52.png)
-
+[Imgur](https://i.imgur.com/ZDHmDE0.png)
