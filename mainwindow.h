@@ -3,7 +3,7 @@
 
 #include <QMap>
 #include <QMainWindow>
-#include <QListWidgetItem>
+#include <QTreeWidgetItem>
 #include <QSystemTrayIcon>
 #include <QProcess>
 #include <QStringList>
@@ -22,11 +22,14 @@ public:
     ~MainWindow();
 
 private:
+    QStringList buildPlinkOptions(QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
+    void deleteTreeWidgetItem(QTreeWidgetItem *item);
+
+    //
     Ui::MainWindow *ui;
     NewEntry *entry;
-    QMap<QListWidgetItem*, QProcess*> processMap;
-    QMap<QListWidgetItem*, QStringList> itemData;
-    QStringList buildPlinkOptions(QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
+    QMap<QTreeWidgetItem*, QProcess*> processMap;
+    QMap<QTreeWidgetItem*, QStringList> itemData;
     QSystemTrayIcon *trayIcon;
 
 private slots:
@@ -35,8 +38,10 @@ private slots:
     void on_actionBeenden_triggered();
     void newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort, bool startup = true);
     void on_buttonPlink_triggered();
-    void on_pushButton_2_clicked();
+    void on_buttonDelete_clicked();
     void toggleWindowState();
+    void on_treeWidget_customContextMenuRequested(const QPoint &pos);
+    void deleteFromContextMenu();
 };
 
 #endif // MAINWINDOW_H

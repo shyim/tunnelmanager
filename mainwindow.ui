@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>500</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="labelPlink">
         <property name="text">
          <string>plink:</string>
         </property>
@@ -43,14 +43,14 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="buttonNewentry">
         <property name="text">
-         <string>New entry</string>
+         <string>New Entry</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="buttonDelete">
         <property name="text">
          <string>Delete</string>
         </property>
@@ -72,7 +72,34 @@
      </layout>
     </item>
     <item>
-     <widget class="QListWidget" name="listWidget"/>
+     <widget class="QTreeWidget" name="treeWidget">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Host</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Local Port</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Remote Port</string>
+       </property>
+      </column>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -81,8 +108,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>21</height>
+     <width>500</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuStart">
@@ -93,7 +120,6 @@
    </widget>
    <addaction name="menuStart"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionBeenden">
    <property name="text">
     <string>Quit</string>
@@ -104,7 +130,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>buttonNewentry</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>addNewEntry()</slot>

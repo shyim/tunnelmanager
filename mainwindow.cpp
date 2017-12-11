@@ -8,8 +8,10 @@
 #include <QSettings>
 #include <QFileInfo>
 #include <QProcess>
+#include <QObject>
 #include <QDialog>
 #include <QDebug>
+#include <QMenu>
 #include <QFile>
 #include <QDir>
 
@@ -28,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     settings.endGroup();
 #else
     ui->linePlink->setVisible(false);
+    ui->buttonPlink->setVisible(false);
+    ui->labelPlink->setVisible(false);
     ui->linePlink->setText("ssh");
 #endif
 
@@ -96,18 +100,15 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
         }
     }
 
-    QListWidgetItem *newItem = new QListWidgetItem();
+    QTreeWidgetItem *newItem = new QTreeWidgetItem();
     itemData[newItem] << name << host << sshPort << user << locPort << extIP << extPort;
 
-    QString eStr;
-    for (QString str : itemData[newItem])
-    {
-        eStr += str % " ";
-    }
-    eStr = eStr.trimmed();
-    newItem->setText(eStr);
+    newItem->setText(0, name);
+    newItem->setText(1, host);
+    newItem->setText(2, locPort);
+    newItem->setText(3, extPort);
 
-    ui->listWidget->addItem(newItem);
+    ui->treeWidget->addTopLevelItem(newItem);
 
     QProcess *process = new QProcess;
     process->start(plink, plink_args);
@@ -205,15 +206,20 @@ QStringList MainWindow::buildPlinkOptions(QString host, QString sshPort, QString
 }
 #endif
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_buttonDelete_clicked()
 {
-    for (QListWidgetItem *item : ui->listWidget->selectedItems())
+    for (QTreeWidgetItem *item : ui->treeWidget->selectedItems())
     {
-        processMap[item]->kill();
-        processMap.remove(item);
-        itemData.remove(item);
-        delete item;
+        deleteTreeWidgetItem(item);
     }
+}
+
+void MainWindow::deleteTreeWidgetItem(QTreeWidgetItem *item)
+{
+    processMap[item]->kill();
+    processMap.remove(item);
+    itemData.remove(item);
+    delete item;
 }
 
 void MainWindow::toggleWindowState()
@@ -224,3 +230,18 @@ void MainWindow::toggleWindowState()
         this->setVisible(true);
     }
 }
+
+void MainWindow::on_treeWidget_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu *contextMenu = new QMenu();
+    QAction *deleteAction = contextMenu->addAction(tr("Delete"), this, SLOT(deleteFromContextMenu()));
+    contextMenu->exec(ui->treeWidget->mapToGlobal(pos));
+    delete deleteAction;
+    delete contextMenu;
+}
+
+void MainWindow::deleteFromContextMenu()
+{
+    on_buttonDelete_clicked();
+}
+

@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>416</height>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Neuen Eintrag erstellen</string>
+   <string>Add New Entry</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -44,7 +44,7 @@
    <item>
     <widget class="QLabel" name="label_7">
      <property name="text">
-      <string>SSH-Port:</string>
+      <string>SSH Port:</string>
      </property>
     </widget>
    </item>
@@ -64,7 +64,7 @@
    <item>
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Lokaler-Port:</string>
+      <string>Local Port:</string>
      </property>
     </widget>
    </item>
@@ -74,7 +74,7 @@
    <item>
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Remote-IP:</string>
+      <string>Remote IP:</string>
      </property>
     </widget>
    </item>
@@ -84,7 +84,7 @@
    <item>
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>Remote-Port:</string>
+      <string>Remote Port:</string>
      </property>
     </widget>
    </item>
