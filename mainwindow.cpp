@@ -103,14 +103,18 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
     QTreeWidgetItem *newItem = new QTreeWidgetItem();
     itemData[newItem] << name << host << sshPort << user << locPort << extIP << extPort;
 
-    newItem->setText(0, name);
-    newItem->setText(1, host);
-    newItem->setText(2, locPort);
-    newItem->setText(3, extPort);
+    newItem->setText(0, "not running");
+    newItem->setText(1, name);
+    newItem->setText(2, host);
+    newItem->setText(3, locPort);
+    newItem->setText(4, extPort);
 
     ui->treeWidget->addTopLevelItem(newItem);
 
     QProcess *process = new QProcess;
+    processToWidgetItem[process] = newItem;
+    connect(process, SIGNAL(started()), this, SLOT(onTunnelStart()));
+    connect(process, SIGNAL(finished(int)), this, SLOT(onTunnelCrash()));
     process->start(plink, plink_args);
 
     processMap[newItem] = process;
@@ -216,6 +220,7 @@ void MainWindow::on_buttonDelete_clicked()
 
 void MainWindow::deleteTreeWidgetItem(QTreeWidgetItem *item)
 {
+    processToWidgetItem.remove(processMap[item]);
     processMap[item]->kill();
     processMap.remove(item);
     itemData.remove(item);
@@ -245,3 +250,16 @@ void MainWindow::deleteFromContextMenu()
     on_buttonDelete_clicked();
 }
 
+void MainWindow::onTunnelStart()
+{
+    QProcess *process = dynamic_cast<QProcess*>(sender());
+
+    processToWidgetItem[process]->setText(0, "running");
+}
+
+void MainWindow::onTunnelCrash()
+{
+    QProcess *process = dynamic_cast<QProcess*>(sender());
+
+    processToWidgetItem[process]->setText(0, process->readAllStandardError());
+}

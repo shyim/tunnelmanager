@@ -30,6 +30,7 @@ private:
     NewEntry *entry;
     QMap<QTreeWidgetItem*, QProcess*> processMap;
     QMap<QTreeWidgetItem*, QStringList> itemData;
+    QMap<QProcess*, QTreeWidgetItem*> processToWidgetItem;
     QSystemTrayIcon *trayIcon;
 
 private slots:
@@ -42,6 +43,8 @@ private slots:
     void toggleWindowState();
     void on_treeWidget_customContextMenuRequested(const QPoint &pos);
     void deleteFromContextMenu();
+    void onTunnelStart();
+    void onTunnelCrash();
 };
 
 #endif // MAINWINDOW_H
