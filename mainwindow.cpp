@@ -103,7 +103,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
     QTreeWidgetItem *newItem = new QTreeWidgetItem();
     itemData[newItem] << name << host << sshPort << user << locPort << extIP << extPort;
 
-    newItem->setText(0, "not running");
+    newItem->setText(0, tr("not running"));
     newItem->setText(1, name);
     newItem->setText(2, host);
     newItem->setText(3, locPort);
@@ -156,6 +156,8 @@ MainWindow::~MainWindow()
     // stop runing plink
     for (QProcess *plink : processMap)
     {
+        disconnect(plink, SIGNAL(started()), this, SLOT(onTunnelStart()));
+        disconnect(plink, SIGNAL(finished(int)), this, SLOT(onTunnelCrash()));
         plink->kill();
     }
 
@@ -254,7 +256,7 @@ void MainWindow::onTunnelStart()
 {
     QProcess *process = dynamic_cast<QProcess*>(sender());
 
-    processToWidgetItem[process]->setText(0, "running");
+    processToWidgetItem[process]->setText(0, tr("running"));
 }
 
 void MainWindow::onTunnelCrash()
