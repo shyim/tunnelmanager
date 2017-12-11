@@ -1,5 +1,6 @@
 #include "newentry.h"
 #include "ui_newentry.h"
+#include <QDebug>
 
 NewEntry::NewEntry(QWidget *parent) :
     QDialog(parent),
@@ -25,10 +26,16 @@ NewEntry::~NewEntry()
     delete ui;
 }
 
+void NewEntry::adaptSize()
+{
+    resize(width(), heightForWidth(width()));
+}
+
 void NewEntry::entryFailed(QString text)
 {
     ui->labelError->setText(tr("<span style=\"color: red;\">%1</span>").arg(text));
     ui->labelError->setVisible(true);
+    adaptSize();
 }
 
 void NewEntry::entrySuccess()

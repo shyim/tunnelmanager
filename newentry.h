@@ -15,6 +15,7 @@ public:
     explicit NewEntry(QWidget *parent = 0);
     void entryFailed(QString text);
     void entrySuccess();
+    void adaptSize();
     ~NewEntry();
 
 private slots:

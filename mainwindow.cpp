@@ -67,6 +67,7 @@ void MainWindow::addNewEntry()
         connect(entry, SIGNAL(finished(int)), this, SLOT(entryDialogClosed(int)));
     }
     entry->show();
+    entry->adaptSize();
 }
 
 void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort, bool startup)
@@ -103,7 +104,8 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
     QTreeWidgetItem *newItem = new QTreeWidgetItem();
     itemData[newItem] << name << host << sshPort << user << locPort << extIP << extPort;
 
-    newItem->setText(0, tr("not running"));
+    newItem->setText(0, tr("Not Running"));
+    newItem->setTextColor(0, QColor("red"));
     newItem->setText(1, name);
     newItem->setText(2, host);
     newItem->setText(3, locPort);
@@ -114,7 +116,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
     QProcess *process = new QProcess;
     processToWidgetItem[process] = newItem;
     connect(process, SIGNAL(started()), this, SLOT(onTunnelStart()));
-    connect(process, SIGNAL(finished(int)), this, SLOT(onTunnelCrash()));
+    connect(process, SIGNAL(finished(int)), this, SLOT(onTunnelCrash(int)));
     process->start(plink, plink_args);
 
     processMap[newItem] = process;
@@ -157,7 +159,7 @@ MainWindow::~MainWindow()
     for (QProcess *plink : processMap)
     {
         disconnect(plink, SIGNAL(started()), this, SLOT(onTunnelStart()));
-        disconnect(plink, SIGNAL(finished(int)), this, SLOT(onTunnelCrash()));
+        disconnect(plink, SIGNAL(finished(int)), this, SLOT(onTunnelCrash(int)));
         plink->kill();
     }
 
@@ -174,7 +176,7 @@ void MainWindow::on_actionBeenden_triggered()
 
 void MainWindow::on_buttonPlink_triggered()
 {
-    QString path = QFileDialog::getOpenFileName(this, tr("plink auswählen"), QString(), "plink.exe (plink.exe)");
+    QString path = QFileDialog::getOpenFileName(this, tr("Select plink.exe"), QString(), "plink.exe (plink.exe)");
     if (path != "")
     {
         ui->linePlink->setText(path);
@@ -256,12 +258,16 @@ void MainWindow::onTunnelStart()
 {
     QProcess *process = dynamic_cast<QProcess*>(sender());
 
-    processToWidgetItem[process]->setText(0, tr("running"));
+    processToWidgetItem[process]->setText(0, tr("Running"));
+    processToWidgetItem[process]->setTextColor(0, QColor("green"));
 }
 
-void MainWindow::onTunnelCrash()
+void MainWindow::onTunnelCrash(int exitCode)
 {
     QProcess *process = dynamic_cast<QProcess*>(sender());
 
+    qDebug() << exitCode;
+
     processToWidgetItem[process]->setText(0, process->readAllStandardError());
+    processToWidgetItem[process]->setTextColor(0, QColor("red"));
 }

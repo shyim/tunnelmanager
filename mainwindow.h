@@ -44,7 +44,7 @@ private slots:
     void on_treeWidget_customContextMenuRequested(const QPoint &pos);
     void deleteFromContextMenu();
     void onTunnelStart();
-    void onTunnelCrash();
+    void onTunnelCrash(int exitCode);
 };
 
 #endif // MAINWINDOW_H
