@@ -19,4 +19,4 @@ Use [`qmake`](http://doc.qt.io/qt-5/qmake-manual.html) to generate a `Makefile` 
     $ make
 
 # Screenshots
-[Imgur](https://i.imgur.com/ZDHmDE0.png)
+![Imgur](https://i.imgur.com/ZDHmDE0.png)
