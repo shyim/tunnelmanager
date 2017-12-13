@@ -202,7 +202,11 @@ QStringList MainWindow::buildPlinkOptions(QString host, QString sshPort, QString
 {
     QStringList plink_args;
 
-    plink_args += "-f";
+    plink_args += "-o";
+    plink_args += "StrictHostKeyChecking=no";
+    plink_args += "-o";
+    plink_args += "UserKnownHostsFile=/dev/null ";
+
     plink_args += user % "@" % host;
     plink_args += "-p";
     plink_args += sshPort;
