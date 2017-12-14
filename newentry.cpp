@@ -59,7 +59,6 @@ void NewEntry::entrySuccess()
     ui->lineUser->setText("");
     ui->lineExtIP->setText("");
     ui->lineExtPort->setText("");
-    close();
 }
 
 void NewEntry::on_buttonOk_clicked()

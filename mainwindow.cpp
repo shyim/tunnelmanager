@@ -109,6 +109,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
         else
         {
             entry->entrySuccess();
+            entry->close();
         }
     }
 
@@ -136,7 +137,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
 void MainWindow::entryDialogClosed(int id)
 {
     Q_UNUSED(id)
-    delete entry;
+    entry->deleteLater();
     entry = nullptr;
 }
 
