@@ -125,6 +125,7 @@
    </widget>
    <addaction name="menuStart"/>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionBeenden">
    <property name="text">
     <string>Quit</string>

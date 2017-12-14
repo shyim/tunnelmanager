@@ -183,7 +183,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionBeenden_triggered()
 {
-    QApplication::quit();
+    close(); // QApplication::quit() is too aggressive...
 }
 
 void MainWindow::on_buttonPlink_triggered()
@@ -241,6 +241,7 @@ void MainWindow::on_buttonDelete_clicked()
 void MainWindow::deleteTreeWidgetItem(QTreeWidgetItem *item)
 {
     processToWidgetItem.remove(processMap[item]);
+    processMap[item]->disconnect(); // disconnect slots to avoid crash at onTunnelCrash
     processMap[item]->kill();
     processMap.remove(item);
     itemData.remove(item);
@@ -282,7 +283,7 @@ void MainWindow::onTunnelCrash(int exitCode)
 {
     QProcess *process = dynamic_cast<QProcess*>(sender());
 
-    qDebug() << exitCode;
+    ui->statusBar->showMessage(QString("%1 quited with Exit Code %2").arg(processToWidgetItem[process]->text(0), QString::number(exitCode)));
 
     processToWidgetItem[process]->setText(0, process->readAllStandardError());
     processToWidgetItem[process]->setTextColor(0, QColor("red"));
