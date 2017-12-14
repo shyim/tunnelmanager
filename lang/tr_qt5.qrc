@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/tr">
+        <file>qtbase_de.qm</file>
+    </qresource>
+</RCC>

@@ -39,8 +39,8 @@ FORMS += \
 
 RESOURCES += \
     res.qrc \
-    lang\tm_tr.qrc
-
+    lang\tm_tr.qrc \
+    lang\tr_qt5.qrc
 
 TRANSLATIONS += \
     lang\tm_de.ts

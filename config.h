@@ -20,10 +20,6 @@
 #define TM_APPVENDORLINK "https://github.com/shyim/"
 #endif
 
-#ifndef TM_DISABLED
-#define TM_ENABLED
-#endif
-
 #ifndef TM_APPSTR
 #define TM_APPSTR "SSH Tunnel Manager"
 #endif
@@ -33,7 +29,7 @@
 #endif
 
 #ifndef TM_COPYRIGHT
-#define TM_COPYRIGHT "2016-2017"
+#define TM_COPYRIGHT "2017"
 #endif
 
 #ifndef TM_APPVER
