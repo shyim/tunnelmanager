@@ -283,7 +283,7 @@ void MainWindow::onTunnelCrash(int exitCode)
 {
     QProcess *process = dynamic_cast<QProcess*>(sender());
 
-    ui->statusBar->showMessage(QString("%1 quited with Exit Code %2").arg(processToWidgetItem[process]->text(0), QString::number(exitCode)));
+    ui->statusBar->showMessage(tr("%1 quited with Exit Code %2").arg(processToWidgetItem[process]->text(0), QString::number(exitCode)));
 
     processToWidgetItem[process]->setText(0, process->readAllStandardError());
     processToWidgetItem[process]->setTextColor(0, QColor("red"));

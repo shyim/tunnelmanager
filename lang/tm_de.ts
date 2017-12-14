@@ -25,7 +25,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
-        <location filename="../mainwindow.cpp" line="261"/>
+        <location filename="../mainwindow.cpp" line="263"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -60,7 +60,7 @@
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="130"/>
+        <location filename="../mainwindow.ui" line="131"/>
         <source>Quit</source>
         <translation>Beenden</translation>
     </message>
@@ -80,19 +80,24 @@
         <translation>%1 existiert bereits</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="118"/>
+        <location filename="../mainwindow.cpp" line="119"/>
         <source>Not Running</source>
         <translation>Läuft nicht</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="190"/>
+        <location filename="../mainwindow.cpp" line="191"/>
         <source>Select plink.exe</source>
         <translation>plink.exe auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>Running</source>
         <translation>Läuft</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="286"/>
+        <source>%1 quited with Exit Code %2</source>
+        <translation>%1 ist gecrasht mit Exit Code %2</translation>
     </message>
 </context>
 <context>
@@ -154,7 +159,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../newentry.cpp" line="75"/>
+        <location filename="../newentry.cpp" line="74"/>
         <source>Please fill in all fields</source>
         <translation>Bitte in alle Felder ausfüllen</translation>
     </message>
@@ -162,37 +167,37 @@
 <context>
     <name>ReleaseMark</name>
     <message>
-        <location filename="../config.h" line="45"/>
+        <location filename="../config.h" line="41"/>
         <source>Release</source>
         <translation>Release</translation>
     </message>
     <message>
-        <location filename="../config.h" line="51"/>
+        <location filename="../config.h" line="47"/>
         <source>Release Candidate</source>
         <translation>Release Candidate</translation>
     </message>
     <message>
-        <location filename="../config.h" line="57"/>
+        <location filename="../config.h" line="53"/>
         <source>Daily Build</source>
         <translation>Tagesbau</translation>
     </message>
     <message>
-        <location filename="../config.h" line="63"/>
+        <location filename="../config.h" line="59"/>
         <source>Developer</source>
         <translation>Entwickler</translation>
     </message>
     <message>
-        <location filename="../config.h" line="69"/>
+        <location filename="../config.h" line="65"/>
         <source>Beta</source>
         <translation>Beta</translation>
     </message>
     <message>
-        <location filename="../config.h" line="75"/>
+        <location filename="../config.h" line="71"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location filename="../config.h" line="80"/>
+        <location filename="../config.h" line="76"/>
         <source>Custom</source>
         <translation>Eigene</translation>
     </message>
