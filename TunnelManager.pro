@@ -46,8 +46,10 @@ TRANSLATIONS += \
     lang\tm_de.ts
 
 OTHER_FILES += \
+    app.rc \
     lang\tm_de.ts \
     lang\tm_de.qm \
     server.png \
     server.ico \
-    TranslationClass
+    TranslationClass \
+    TunnelManager.exe.manifest
