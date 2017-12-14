@@ -52,5 +52,4 @@ OTHER_FILES += \
     lang\tm_de.qm \
     server.png \
     server.ico \
-    TranslationClass \
     TunnelManager.exe.manifest

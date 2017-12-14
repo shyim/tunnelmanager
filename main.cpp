@@ -10,8 +10,8 @@
 *****************************************************************************/
 
 #include "mainwindow.h"
+#include "TranslationClass.h"
 #include <QApplication>
-#include <TranslationClass>
 
 int main(int argc, char *argv[])
 {

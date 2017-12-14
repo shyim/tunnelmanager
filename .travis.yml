@@ -1,0 +1,19 @@
+dist: trusty
+sudo: required
+
+language: cpp
+
+services:
+- docker
+
+script:
+- travis/win32docker.sh
+
+deploy:
+  provider: releases
+  api_key:
+    secure: sBl+HBja8QyARU7rRSiHuFkLStQL1cRTTxokW1yGoqIJ88VMOqZL2kT8w4Nu1wtYxt9i8n98UOhDouz1K789tBIeFSh0H8dO1Om/HdT/KWBSK6dSwNix2I/X1OyNI1im+5B71Q7vjXyzqzTjXJToK7qXxibJC5NMozVk0PRvQcLTTudobq17FXqjSkM2Gc2zmboDsH82S2E3vdBIOs3abCiyh/G4SEMWKtWkKNr6szvs23/pOiB+RQxjbzp692SHjRhTXFVO7HBvdVbjPebWUUwyu/AXt/w2b+d5sV91dEEEspzkpajZtm1stPsVf6cvyB5coukHt8oiSpim3cGGdcXM4RNCsnZtmU8hvs0nV3YI3r+XompCFk0EU9oRkZttE7M7oBiS4CFjhw+g/n6kTrNXRZpT+YBZErVX6QsAHGgKiMKKUpa2VgeXoA8gow9zgGZJknBMg3P7UEuNl6O/udV8H7X0jesrPz2BbtEBUpuQ/tUNTg++OeLSGGfYHzvVyCDehLDcJ0GItjaMvRnz7GXWZhfsHakj3wYDBRgDtAnSdgcz3tQt+/cdBSoi4soP9YJ53lxvvwenvrIpZ1whtorgJH/Gef5kGx0KhZVoDq+GNe4axLMEemdaqjBXeTe3r9mby+jRmgaCwEeoKAnQinbSdb8N4Ahwb8r/IVR38yE=
+  file: assets/TunnelManager.exe
+  skip_cleanup: true
+  on:
+    tags: true
