@@ -18,6 +18,7 @@ TEMPLATE = app
 
 win32: RC_FILE = app.rc
 win32: TARGET = TunnelManager
+win32: CONFIG -= embed_manifest_exe
 
 PRECOMPILED_HEADERS += config.h
 
