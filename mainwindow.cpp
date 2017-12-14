@@ -1,6 +1,18 @@
+/*****************************************************************************
+* tunnelmanager - Simple GUI for SSH Tunnels
+*
+* Copyright (C) 2017 Soner Sayakci
+* Copyright (C) 2017 Syping
+*
+* This software may be modified and distributed under the terms
+* of the MIT license.  See the LICENSE file for details.
+*
+*****************************************************************************/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "newentry.h"
+#include "config.h"
 #include <QSystemTrayIcon>
 #include <QStringBuilder>
 #include <QFileDialog>
@@ -22,8 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     entry = nullptr;
     ui->setupUi(this);
 
-    QSettings settings ("Shyim", "SSH Tunnel Manager");
-
+    QSettings settings(TM_APPVENDOR, TM_APPSTR);
 #ifdef Q_OS_WIN
     settings.beginGroup("settings");
     ui->linePlink->setText(settings.value("plink").toString());
@@ -44,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     settings.endGroup();
 
     trayIcon = new QSystemTrayIcon(QIcon(":/server.png"), this);
-    trayIcon->setToolTip(tr("Tunnel Manager"));
+    trayIcon->setToolTip(TM_APPSTR);
     trayIcon->show();
 
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(toggleWindowState()));
@@ -131,7 +142,7 @@ void MainWindow::entryDialogClosed(int id)
 
 MainWindow::~MainWindow()
 {
-    QSettings settings("Shyim", "SSH Tunnel Manager");
+    QSettings settings(TM_APPVENDOR, TM_APPSTR);
 #ifdef Q_OS_WIN
     settings.beginGroup("settings");
     settings.setValue("plink", ui->linePlink->text());

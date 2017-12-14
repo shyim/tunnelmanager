@@ -1,3 +1,14 @@
+/*****************************************************************************
+* tunnelmanager - Simple GUI for SSH Tunnels
+*
+* Copyright (C) 2017 Soner Sayakci
+* Copyright (C) 2017 Syping
+*
+* This software may be modified and distributed under the terms
+* of the MIT license.  See the LICENSE file for details.
+*
+*****************************************************************************/
+
 #include "newentry.h"
 #include "ui_newentry.h"
 #include <QDebug>
