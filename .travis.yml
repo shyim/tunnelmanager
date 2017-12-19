@@ -7,7 +7,7 @@ services:
 - docker
 
 script:
-- travis/win32docker.sh
+- travis/win64docker.sh
 
 deploy:
   provider: releases
