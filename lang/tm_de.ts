@@ -25,7 +25,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
-        <location filename="../mainwindow.cpp" line="263"/>
+        <location filename="../mainwindow.cpp" line="264"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -75,27 +75,33 @@
         <translation>Kein plink ausgewählt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="106"/>
+        <location filename="../mainwindow.cpp" line="107"/>
         <source>%1 already exists</source>
         <translation>%1 existiert bereits</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="119"/>
+        <location filename="../mainwindow.cpp" line="120"/>
+        <location filename="../mainwindow.cpp" line="316"/>
         <source>Not Running</source>
         <translation>Läuft nicht</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="192"/>
         <source>Select plink.exe</source>
         <translation>plink.exe auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>Running</source>
         <translation>Läuft</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
+        <location filename="../mainwindow.cpp" line="282"/>
+        <source>%1 started</source>
+        <translation>%1 gestartet</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>%1 quited with Exit Code %2</source>
         <translation>%1 ist gecrasht mit Exit Code %2</translation>
     </message>
@@ -153,13 +159,13 @@
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../newentry.cpp" line="47"/>
+        <location filename="../newentry.cpp" line="49"/>
         <source>&lt;span style=&quot;color: red;&quot;&gt;%1&lt;/span&gt;</source>
         <translatorcomment>Kein Mensch braucht Platzhalter unter tr</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../newentry.cpp" line="74"/>
+        <location filename="../newentry.cpp" line="76"/>
         <source>Please fill in all fields</source>
         <translation>Bitte in alle Felder ausfüllen</translation>
     </message>

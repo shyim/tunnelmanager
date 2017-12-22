@@ -30,6 +30,8 @@ NewEntry::NewEntry(QWidget *parent) :
     ui->lineUser->setText("");
     ui->lineExtIP->setText("");
     ui->lineExtPort->setText("");
+
+    item = nullptr;
 }
 
 NewEntry::~NewEntry()
@@ -75,10 +77,27 @@ void NewEntry::on_buttonOk_clicked()
         return;
     }
 
+    if (item != nullptr) {
+        emit itemModified(item, ui->lineName->text(), ui->lineHost->text(), ui->lineSshPort->text(), ui->lineUser->text(), ui->lineLocPort->text(), ui->lineExtIP->text(), ui->lineExtPort->text());
+        return;
+    }
+
     emit newEntryAdded(ui->lineName->text(), ui->lineHost->text(), ui->lineSshPort->text(), ui->lineUser->text(), ui->lineLocPort->text(), ui->lineExtIP->text(), ui->lineExtPort->text(), false);
 }
 
 void NewEntry::on_buttonCancel_clicked()
 {
     close();
+}
+
+void NewEntry::fillForm(QStringList data, QTreeWidgetItem *item_)
+{
+    item = item_;
+    ui->lineName->setText(data.at(0));
+    ui->lineHost->setText(data.at(1));
+    ui->lineSshPort->setText(data.at(2));
+    ui->lineUser->setText(data.at(3));
+    ui->lineLocPort->setText(data.at(4));
+    ui->lineExtIP->setText(data.at(5));
+    ui->lineExtPort->setText(data.at(6));
 }

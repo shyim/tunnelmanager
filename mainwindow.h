@@ -44,6 +44,9 @@ private:
     QMap<QProcess*, QTreeWidgetItem*> processToWidgetItem;
     QSystemTrayIcon *trayIcon;
 
+public slots:
+    void itemModified(QTreeWidgetItem *item, QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
+
 private slots:
     void addNewEntry();
     void entryDialogClosed(int id);
@@ -56,6 +59,7 @@ private slots:
     void deleteFromContextMenu();
     void onTunnelStart();
     void onTunnelCrash(int exitCode);
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 };
 
 #endif // MAINWINDOW_H

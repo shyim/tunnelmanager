@@ -13,6 +13,8 @@
 #define NEWENTRY_H
 
 #include <QDialog>
+#include <QStringList>
+#include <QTreeWidgetItem>
 
 namespace Ui {
 class NewEntry;
@@ -24,6 +26,7 @@ class NewEntry : public QDialog
 
 public:
     explicit NewEntry(QWidget *parent = 0);
+    void fillForm(QStringList data, QTreeWidgetItem *item);
     void entryFailed(QString text);
     void entrySuccess();
     void adaptSize();
@@ -35,9 +38,11 @@ private slots:
 
 signals:
     void newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort, bool startup);
+    void itemModified(QTreeWidgetItem *item, QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
 
 private:
     Ui::NewEntry *ui;
+    QTreeWidgetItem *item;
 };
 
 #endif // NEWENTRY_H

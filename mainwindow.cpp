@@ -75,6 +75,7 @@ void MainWindow::addNewEntry()
     {
         entry = new NewEntry(this);
         connect(entry, SIGNAL(newEntryAdded(QString,QString,QString,QString,QString,QString,QString,bool)), this, SLOT(newEntryAdded(QString,QString,QString,QString,QString,QString,QString,bool)));
+        connect(entry, SIGNAL(itemModified(QTreeWidgetItem*,QString,QString,QString,QString,QString,QString,QString)), this, SLOT(itemModified(QTreeWidgetItem*,QString,QString,QString,QString,QString,QString,QString)));
         connect(entry, SIGNAL(finished(int)), this, SLOT(entryDialogClosed(int)));
     }
     entry->show();
@@ -277,14 +278,58 @@ void MainWindow::onTunnelStart()
 
     processToWidgetItem[process]->setText(0, tr("Running"));
     processToWidgetItem[process]->setTextColor(0, QColor("green"));
+
+    ui->statusBar->showMessage(tr("%1 started").arg(processToWidgetItem[process]->text(1)));
 }
 
 void MainWindow::onTunnelCrash(int exitCode)
 {
     QProcess *process = dynamic_cast<QProcess*>(sender());
 
-    ui->statusBar->showMessage(tr("%1 quited with Exit Code %2").arg(processToWidgetItem[process]->text(0), QString::number(exitCode)));
+    ui->statusBar->showMessage(tr("%1 quited with Exit Code %2").arg(processToWidgetItem[process]->text(1), QString::number(exitCode)));
 
     processToWidgetItem[process]->setText(0, process->readAllStandardError());
     processToWidgetItem[process]->setTextColor(0, QColor("red"));
+}
+
+void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    Q_UNUSED(column)
+    this->addNewEntry();
+
+    entry->fillForm(itemData[item], item);
+}
+
+void MainWindow::itemModified(QTreeWidgetItem *item, QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort)
+{
+    QProcess *process = processMap[item];
+    processToWidgetItem.remove(process);
+    processMap.remove(item);
+    process->disconnect();
+    process->kill();
+    process->waitForFinished();
+    delete process;
+
+    itemData[item].clear();
+    itemData[item] << name << host << sshPort << user << locPort << extIP << extPort;
+
+    item->setText(0, tr("Not Running"));
+    item->setTextColor(0, QColor("red"));
+    item->setText(1, name);
+    item->setText(2, host);
+    item->setText(3, locPort);
+    item->setText(4, extPort);
+
+    QString plink = ui->linePlink->text();
+    QStringList plink_args = buildPlinkOptions(host, sshPort, user, locPort, extIP, extPort);
+
+    process = new QProcess;
+    processToWidgetItem[process] = item;
+    connect(process, SIGNAL(started()), this, SLOT(onTunnelStart()));
+    connect(process, SIGNAL(finished(int)), this, SLOT(onTunnelCrash(int)));
+    process->start(plink, plink_args);
+
+    processMap[item] = process;
+
+    entry->close();
 }
