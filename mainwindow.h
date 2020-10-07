@@ -1,8 +1,8 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
+* Copyright (C) 2017-2020 Syping
 * Copyright (C) 2017 Soner Sayakci
-* Copyright (C) 2017 Syping
 *
 * This software may be modified and distributed under the terms
 * of the MIT license.  See the LICENSE file for details.
@@ -33,10 +33,9 @@ public:
     ~MainWindow();
 
 private:
-    QStringList buildPlinkOptions(QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
+    QVector<QString> buildPlinkOpenSSHOptions(const QString &exec, const QString &host, const QString &sshPort, const QString &user, const QString &locPort, const QString &extIP, const QString &extPort);
     void deleteTreeWidgetItem(QTreeWidgetItem *item);
 
-    //
     Ui::MainWindow *ui;
     NewEntry *entry;
     QMap<QTreeWidgetItem*, QProcess*> processMap;
@@ -52,8 +51,8 @@ private slots:
     void entryDialogClosed(int id);
     void on_actionBeenden_triggered();
     void newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort, bool startup = true);
-    void on_buttonPlink_triggered();
     void on_buttonDelete_clicked();
+    void selectPlinkOpenSSH();
     void toggleWindowState();
     void on_treeWidget_customContextMenuRequested(const QPoint &pos);
     void deleteFromContextMenu();

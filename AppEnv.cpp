@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2020 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -21,7 +21,6 @@
 
 AppEnv::AppEnv()
 {
-
 }
 
 // Folder Stuff
@@ -51,22 +50,6 @@ QString AppEnv::getInLangFolder()
 QString AppEnv::getPluginsFolder()
 {
     return convertBuildedString(TM_PLUG);
-}
-
-// Screen Stuff
-
-qreal AppEnv::screenRatio()
-{
-#if QT_VERSION >= 0x050000
-    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
-#else
-    qreal dpi = qApp->desktop()->logicalDpiX();
-#endif
-#ifdef Q_OS_MAC
-    return (dpi / 72);
-#else
-    return (dpi / 96);
-#endif
 }
 
 // Convert Stuff

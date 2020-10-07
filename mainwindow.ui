@@ -18,21 +18,21 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="labelPlink">
+       <widget class="QLabel" name="labelPlinkOpenSSH">
         <property name="text">
-         <string>plink:</string>
+         <string>Plink/OpenSSH:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="linePlink">
+       <widget class="QLineEdit" name="linePlinkOpenSSH">
         <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="buttonPlink">
+       <widget class="QToolButton" name="buttonPlinkOpenSSH">
         <property name="text">
          <string>...</string>
         </property>
@@ -152,7 +152,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonPlink</sender>
+   <sender>buttonPlinkOpenSSH</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>on_buttonPlink_triggered()</slot>

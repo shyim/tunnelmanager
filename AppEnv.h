@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2020 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -24,9 +24,6 @@ public:
     static QString getExLangFolder();
     static QString getInLangFolder();
     static QString getPluginsFolder();
-
-    // Screen Stuff
-    static qreal screenRatio();
 	
 	// Convert Stuff
 	static QString convertBuildedString(const QString &buildedStr);

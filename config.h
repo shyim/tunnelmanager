@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2020 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -29,11 +29,11 @@
 #endif
 
 #ifndef TM_COPYRIGHT
-#define TM_COPYRIGHT "2017"
+#define TM_COPYRIGHT "2017-2020"
 #endif
 
 #ifndef TM_APPVER
-#define TM_APPVER "1.0.0"
+#define TM_APPVER "0.2.0"
 #endif
 
 #ifdef TM_BUILDTYPE_REL
@@ -83,9 +83,6 @@
 #ifndef TM_LANG
 #define TM_LANG "QCONFLANG:"
 #endif
-#ifndef TM_PLUG
-#define TM_PLUG "QCONFPLUG:"
-#endif
 #ifdef TM_QCONF_IN
 #ifndef TM_INLANG
 #define TM_INLANG ":/tr"
@@ -103,10 +100,6 @@
 
 #ifndef TM_PLUG
 #define TM_PLUG "RUNDIR:SEPARATOR:plugins"
-#endif
-
-#ifdef TM_WINRT
-#undef TM_WIN
 #endif
 
 #ifndef TM_COMPILER

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=TunnelManager
+Comment=Simple GUI for SSH Tunnels
+Categories=Qt;Utility;
+Exec=tunnelmanager
+Icon=de.shyim.tunnelmanager
+Terminal=false
+StartupNotify=false
