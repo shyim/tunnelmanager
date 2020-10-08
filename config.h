@@ -24,6 +24,10 @@
 #define TM_APPSTR "SSH Tunnel Manager"
 #endif
 
+#ifndef TM_APPDIRSTR
+#define TM_APPDIRSTR "tunnelmanager"
+#endif
+
 #ifndef TM_APPDES
 #define TM_APPDES "INSERT YOUR APPLICATION DESCRIPTION HERE"
 #endif
@@ -96,10 +100,6 @@
 
 #ifndef TM_LANG
 #define TM_LANG "SHAREDDIR:SEPARATOR:lang"
-#endif
-
-#ifndef TM_PLUG
-#define TM_PLUG "RUNDIR:SEPARATOR:plugins"
 #endif
 
 #ifndef TM_COMPILER

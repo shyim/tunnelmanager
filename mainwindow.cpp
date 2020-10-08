@@ -13,6 +13,7 @@
 #include "ui_mainwindow.h"
 #include "newentry.h"
 #include "config.h"
+#include <QAbstractScrollArea>
 #include <QSystemTrayIcon>
 #include <QStringBuilder>
 #include <QFileDialog>
@@ -39,12 +40,14 @@ MainWindow::MainWindow(QWidget *parent) :
     settings.beginGroup("Settings");
     ui->linePlinkOpenSSH->setText(settings.value("PlinkOpenSSH").toString());
     settings.endGroup();
+    QObject::connect(ui->buttonPlinkOpenSSH, &QToolButton::clicked, this, &MainWindow::selectPlinkOpenSSH);
 #else
     ui->linePlinkOpenSSH->setVisible(false);
     ui->buttonPlinkOpenSSH->setVisible(false);
     ui->labelPlinkOpenSSH->setVisible(false);
     ui->linePlinkOpenSSH->setText("ssh");
 #endif
+    ui->actionQuit->setShortcut(QKeySequence("Alt+F4"));
 
     settings.beginGroup("hosts");
     for (const QString &name : settings.allKeys()) {
@@ -53,12 +56,18 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     settings.endGroup();
 
-    trayIcon = new QSystemTrayIcon(QIcon(":/server.png"), this);
-    trayIcon->setToolTip(TM_APPSTR);
+    QIcon serverIcon = QIcon(":/server.png");
+    trayIcon = new QSystemTrayIcon(serverIcon, this);
+    trayIcon->setToolTip(QString::fromUtf8(TM_APPSTR));
     trayIcon->show();
+    setWindowIcon(serverIcon);
 
     QObject::connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::toggleWindowState);
-    QObject::connect(ui->buttonPlinkOpenSSH, &QToolButton::clicked, this, &MainWindow::selectPlinkOpenSSH);
+}
+
+void MainWindow::adaptSize()
+{
+    resize(550, 450);
 }
 
 void MainWindow::addNewEntry()
@@ -170,7 +179,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_actionBeenden_triggered()
+void MainWindow::on_actionQuit_triggered()
 {
     close(); // QApplication::quit() is too aggressive...
 }

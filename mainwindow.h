@@ -31,6 +31,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void adaptSize();
 
 private:
     QVector<QString> buildPlinkOpenSSHOptions(const QString &exec, const QString &host, const QString &sshPort, const QString &user, const QString &locPort, const QString &extIP, const QString &extPort);
@@ -49,7 +50,7 @@ public slots:
 private slots:
     void addNewEntry();
     void entryDialogClosed(int id);
-    void on_actionBeenden_triggered();
+    void on_actionQuit_triggered();
     void newEntryAdded(QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort, bool startup = true);
     void on_buttonDelete_clicked();
     void selectPlinkOpenSSH();

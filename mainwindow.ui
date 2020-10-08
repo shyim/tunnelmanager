@@ -6,17 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>400</height>
+    <width>550</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>SSH Tunnel Manager</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="vlTunnelManager">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="hlPlinkOpenSSH">
       <item>
        <widget class="QLabel" name="labelPlinkOpenSSH">
         <property name="text">
@@ -113,7 +113,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>500</width>
+     <width>550</width>
      <height>21</height>
     </rect>
    </property>
@@ -121,12 +121,12 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionBeenden"/>
+    <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuStart"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionBeenden">
+  <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
    </property>
@@ -148,22 +148,6 @@
     <hint type="destinationlabel">
      <x>262</x>
      <y>43</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonPlinkOpenSSH</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>on_buttonPlink_triggered()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>369</x>
-     <y>45</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>351</x>
-     <y>79</y>
     </hint>
    </hints>
   </connection>

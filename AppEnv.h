@@ -23,7 +23,6 @@ public:
     // Folder Stuff
     static QString getExLangFolder();
     static QString getInLangFolder();
-    static QString getPluginsFolder();
 	
 	// Convert Stuff
 	static QString convertBuildedString(const QString &buildedStr);

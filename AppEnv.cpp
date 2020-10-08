@@ -36,20 +36,15 @@ QString AppEnv::getInLangFolder()
 #ifdef TM_INLANG
     return convertBuildedString(TM_INLANG);
 #else
-    return convertBuildedString(TM_SHARE % QLatin1String("SEPARATOR:APPNAME:SEPARATOR:translations"));
+    return convertBuildedString(TM_SHARE % QLatin1String("SEPARATOR:APPDIRNAME:SEPARATOR:translations"));
 #endif
 #else
 #ifdef TM_INLANG
     return convertBuildedString(TM_INLANG);
 #else
-    return QString(":/tr");
+    return QLatin1String(":/tr");
 #endif
 #endif
-}
-
-QString AppEnv::getPluginsFolder()
-{
-    return convertBuildedString(TM_PLUG);
 }
 
 // Convert Stuff
@@ -57,10 +52,10 @@ QString AppEnv::getPluginsFolder()
 QString AppEnv::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;
-    QByteArray sharePath = TM_SHARE;
-    outputStr.replace("APPNAME:", TM_APPSTR);
-    outputStr.replace("SHAREDDIR:", QString::fromUtf8(sharePath));
-    outputStr.replace("RUNDIR:", QFileInfo(QApplication::applicationFilePath()).absoluteDir().absolutePath());
+    outputStr.replace("APPNAME:", QString::fromUtf8(TM_APPSTR));
+    outputStr.replace("APPDIRNAME:", QString::fromUtf8(TM_APPDIRSTR));
+    outputStr.replace("SHAREDDIR:", QString::fromUtf8(TM_SHARE));
+    outputStr.replace("RUNDIR:", QFileInfo(QApplication::applicationFilePath()).canonicalPath());
     outputStr.replace("QCONFLANG:", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     outputStr.replace("QCONFPLUG:", QLibraryInfo::location(QLibraryInfo::PluginsPath));
     outputStr.replace("SEPARATOR:", QDir::separator());

@@ -25,7 +25,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
-        <location filename="../mainwindow.cpp" line="267"/>
+        <location filename="../mainwindow.cpp" line="276"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -65,43 +65,43 @@
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="77"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="68"/>
+        <location filename="../mainwindow.cpp" line="77"/>
         <source>No Plink/OpenSSH selected</source>
         <translation>Kein Plink/OpenSSH ausgewählt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="100"/>
+        <location filename="../mainwindow.cpp" line="109"/>
         <source>%1 already exists</source>
         <translation>%1 existiert bereits</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="112"/>
-        <location filename="../mainwindow.cpp" line="319"/>
+        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="328"/>
         <source>Not Running</source>
         <translation>Läuft nicht</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="189"/>
         <source>Select plink.exe or ssh.exe</source>
         <translation>plink.exe oder ssh.exe auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="282"/>
+        <location filename="../mainwindow.cpp" line="291"/>
         <source>Running</source>
         <translation>Läuft</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="285"/>
+        <location filename="../mainwindow.cpp" line="294"/>
         <source>%1 started</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="292"/>
+        <location filename="../mainwindow.cpp" line="301"/>
         <source>%1 quited with Exit Code %2</source>
         <translation>%1 ist gecrasht mit Exit Code %2</translation>
     </message>
@@ -173,37 +173,37 @@
 <context>
     <name>ReleaseMark</name>
     <message>
-        <location filename="../config.h" line="41"/>
+        <location filename="../config.h" line="45"/>
         <source>Release</source>
         <translation>Release</translation>
     </message>
     <message>
-        <location filename="../config.h" line="47"/>
+        <location filename="../config.h" line="51"/>
         <source>Release Candidate</source>
         <translation>Release Candidate</translation>
     </message>
     <message>
-        <location filename="../config.h" line="53"/>
+        <location filename="../config.h" line="57"/>
         <source>Daily Build</source>
         <translation>Tagesbau</translation>
     </message>
     <message>
-        <location filename="../config.h" line="59"/>
+        <location filename="../config.h" line="63"/>
         <source>Developer</source>
         <translation>Entwickler</translation>
     </message>
     <message>
-        <location filename="../config.h" line="65"/>
+        <location filename="../config.h" line="69"/>
         <source>Beta</source>
         <translation>Beta</translation>
     </message>
     <message>
-        <location filename="../config.h" line="71"/>
+        <location filename="../config.h" line="75"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location filename="../config.h" line="76"/>
+        <location filename="../config.h" line="80"/>
         <source>Custom</source>
         <translation>Eigene</translation>
     </message>
