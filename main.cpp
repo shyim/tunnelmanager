@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -32,12 +32,19 @@ int main(int argc, char *argv[])
 #endif
 #endif
 
+    bool startHidden = false;
+    const QStringList args = a.arguments();
+    for (const QString &arg : args) {
+        if (arg == "--hidden")
+            startHidden = true;
+    }
+
     TCIS->initUserLanguage();
     TCIS->loadTranslation(&a);
 
     MainWindow w;
-    w.show();
-    w.adaptSize();
+    if (!startHidden)
+        w.showNormal();
 
     return a.exec();
 }

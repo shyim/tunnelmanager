@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -42,7 +42,7 @@ private:
     QMap<QTreeWidgetItem*, QProcess*> processMap;
     QMap<QTreeWidgetItem*, QStringList> itemData;
     QMap<QProcess*, QTreeWidgetItem*> processToWidgetItem;
-    QSystemTrayIcon *trayIcon;
+    QSystemTrayIcon trayIcon;
 
 public slots:
     void itemModified(QTreeWidgetItem *item, QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort);
@@ -58,7 +58,7 @@ private slots:
     void on_treeWidget_customContextMenuRequested(const QPoint &pos);
     void deleteFromContextMenu();
     void onTunnelStart();
-    void onTunnelCrash(int exitCode);
+    void onTunnelCrash(int exitCode, QProcess::ExitStatus exitStatus);
     void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 };
 

@@ -25,7 +25,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="55"/>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="274"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -65,22 +65,22 @@
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
+        <location filename="../mainwindow.cpp" line="79"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="77"/>
+        <location filename="../mainwindow.cpp" line="79"/>
         <source>No Plink/OpenSSH selected</source>
         <translation>Kein Plink/OpenSSH ausgewählt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="109"/>
+        <location filename="../mainwindow.cpp" line="111"/>
         <source>%1 already exists</source>
         <translation>%1 existiert bereits</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="123"/>
         <location filename="../mainwindow.cpp" line="328"/>
         <source>Not Running</source>
         <translation>Läuft nicht</translation>
@@ -91,17 +91,17 @@
         <translation>plink.exe oder ssh.exe auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="291"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Running</source>
         <translation>Läuft</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../mainwindow.cpp" line="292"/>
         <source>%1 started</source>
         <translation>%1 gestartet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>%1 quited with Exit Code %2</source>
         <translation>%1 ist gecrasht mit Exit Code %2</translation>
     </message>
@@ -173,37 +173,37 @@
 <context>
     <name>ReleaseMark</name>
     <message>
-        <location filename="../config.h" line="45"/>
+        <location filename="../config.h" line="17"/>
         <source>Release</source>
         <translation>Release</translation>
     </message>
     <message>
-        <location filename="../config.h" line="51"/>
+        <location filename="../config.h" line="18"/>
         <source>Release Candidate</source>
         <translation>Release Candidate</translation>
     </message>
     <message>
-        <location filename="../config.h" line="57"/>
+        <location filename="../config.h" line="22"/>
         <source>Daily Build</source>
         <translation>Tagesbau</translation>
     </message>
     <message>
-        <location filename="../config.h" line="63"/>
+        <location filename="../config.h" line="21"/>
         <source>Developer</source>
         <translation>Entwickler</translation>
     </message>
     <message>
-        <location filename="../config.h" line="69"/>
+        <location filename="../config.h" line="19"/>
         <source>Beta</source>
         <translation>Beta</translation>
     </message>
     <message>
-        <location filename="../config.h" line="75"/>
+        <location filename="../config.h" line="20"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location filename="../config.h" line="80"/>
+        <location filename="../config.h" line="23"/>
         <source>Custom</source>
         <translation>Eigene</translation>
     </message>

@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -11,6 +11,17 @@
 
 #ifndef CONFIG_H
 #define CONFIG_H
+
+#if __cplusplus
+#include <QString>
+#define REL_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Release")
+#define RC_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Release Candidate")
+#define BETA_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Beta")
+#define ALPHA_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Alpha")
+#define DEV_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Developer")
+#define DAILY_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Daily Build")
+#define CUSTOM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Custom")
+#endif
 
 #ifndef TM_APPVENDOR
 #define TM_APPVENDOR "Shyim"
@@ -33,56 +44,16 @@
 #endif
 
 #ifndef TM_COPYRIGHT
-#define TM_COPYRIGHT "2017-2020"
+#define TM_COPYRIGHT "2017-2021"
 #endif
 
 #ifndef TM_APPVER
-#define TM_APPVER "0.2.0"
-#endif
-
-#ifdef TM_BUILDTYPE_REL
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Release")
-#endif
-#endif
-
-#ifdef TM_BUILDTYPE_RC
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Release Candidate")
-#endif
-#endif
-
-#ifdef TM_BUILDTYPE_DAILY
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Daily Build")
-#endif
-#endif
-
-#ifdef TM_BUILDTYPE_DEV
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Developer")
-#endif
-#endif
-
-#ifdef TM_BUILDTYPE_BETA
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Beta")
-#endif
-#endif
-
-#ifdef TM_BUILDTYPE_ALPHA
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Alpha")
-#endif
-#endif
-
-#ifndef TM_BUILDTYPE
-#define TM_BUILDTYPE QT_TRANSLATE_NOOP("ReleaseMark", "Custom")
+#define TM_APPVER "0.3.0"
 #endif
 
 #ifdef TM_QCONF
 #ifndef TM_SHARE
-#define TM_SHARE "RUNDIR:SEPARATOR:..SEPARATOR:share"
+#define TM_SHARE "RUNDIR:/../share"
 #endif
 #ifndef TM_LANG
 #define TM_LANG "QCONFLANG:"

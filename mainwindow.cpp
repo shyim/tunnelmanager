@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -56,13 +56,15 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     settings.endGroup();
 
-    QIcon serverIcon = QIcon(":/server.png");
-    trayIcon = new QSystemTrayIcon(serverIcon, this);
-    trayIcon->setToolTip(QString::fromUtf8(TM_APPSTR));
-    trayIcon->show();
+    QIcon serverIcon(":/server.png");
+    trayIcon.setIcon(serverIcon);
+    trayIcon.setToolTip(QString::fromUtf8(TM_APPSTR));
+    trayIcon.show();
     setWindowIcon(serverIcon);
 
-    QObject::connect(trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::toggleWindowState);
+    QObject::connect(&trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::toggleWindowState);
+
+    adaptSize();
 }
 
 void MainWindow::adaptSize()
@@ -96,7 +98,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
 
     if (!startup) {
         bool duplicate = false;
-        for (const QStringList &stringList : itemData) {
+        for (const QStringList &stringList : qAsConst(itemData)) {
             if (stringList.length() >= 1) {
                 if (name == stringList.at(0)) {
                     duplicate = true;
@@ -130,7 +132,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
     QProcess *process = new QProcess;
     processToWidgetItem[process] = newItem;
     QObject::connect(process, &QProcess::started, this, &MainWindow::onTunnelStart);
-    QObject::connect(process, QOverload<int>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
+    QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
     process->start(plinkOpenSSH, plinkOpenSSH_args);
 
     processMap[newItem] = process;
@@ -153,35 +155,33 @@ MainWindow::~MainWindow()
 #endif
     settings.beginGroup("hosts");
     QStringList nameList;
-    for (const QStringList &stringList : itemData.values()) {
+    for (const QStringList &stringList : qAsConst(itemData)) {
         QStringList dataList = stringList;
         dataList.removeFirst();
         settings.setValue(stringList.at(0), dataList);
         nameList << stringList.at(0);
     }
     for (const QString &name : settings.allKeys()) {
-        if (!nameList.contains(name)) {
+        if (!nameList.contains(name))
             settings.remove(name);
-        }
     }
     settings.endGroup();
 
     // stop runing Plink/OpenSSH
-    for (QProcess *plinkOpenSSH : processMap) {
+    for (QProcess *plinkOpenSSH : qAsConst(processMap)) {
         QObject::disconnect(plinkOpenSSH, &QProcess::started, this, &MainWindow::onTunnelStart);
-        QObject::disconnect(plinkOpenSSH, QOverload<int>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
+        QObject::disconnect(plinkOpenSSH, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
         plinkOpenSSH->kill();
     }
 
-    trayIcon->hide();
-    delete trayIcon;
-
+    trayIcon.hide();
     delete ui;
 }
 
 void MainWindow::on_actionQuit_triggered()
 {
-    close(); // QApplication::quit() is too aggressive...
+    trayIcon.hide();
+    QApplication::quit();
 }
 
 void MainWindow::selectPlinkOpenSSH()
@@ -262,12 +262,10 @@ void MainWindow::deleteTreeWidgetItem(QTreeWidgetItem *item)
 
 void MainWindow::toggleWindowState()
 {
-    if (isVisible()) {
-        setVisible(false);
-    }
-    else {
-        setVisible(true);
-    }
+    if (isMinimized() || !isVisible())
+        showNormal();
+    else
+        hide();
 }
 
 void MainWindow::on_treeWidget_customContextMenuRequested(const QPoint &pos)
@@ -294,11 +292,11 @@ void MainWindow::onTunnelStart()
     ui->statusBar->showMessage(tr("%1 started").arg(processToWidgetItem[process]->text(1)));
 }
 
-void MainWindow::onTunnelCrash(int exitCode)
+void MainWindow::onTunnelCrash(int exitCode, QProcess::ExitStatus exitStatus)
 {
     QProcess *process = static_cast<QProcess*>(sender());
 
-    ui->statusBar->showMessage(tr("%1 quited with Exit Code %2").arg(processToWidgetItem[process]->text(1), QString::number(exitCode)));
+    ui->statusBar->showMessage(tr("%1 quited with Exit Code %2").arg(processToWidgetItem.value(process)->text(1), QString::number(exitCode)));
 
     processToWidgetItem[process]->setText(0, process->readAllStandardError());
     processToWidgetItem[process]->setTextColor(0, QColor("red"));
@@ -314,13 +312,15 @@ void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int colu
 
 void MainWindow::itemModified(QTreeWidgetItem *item, QString name, QString host, QString sshPort, QString user, QString locPort, QString extIP, QString extPort)
 {
-    QProcess *process = processMap[item];
-    processToWidgetItem.remove(process);
-    processMap.remove(item);
-    process->disconnect();
-    process->kill();
-    process->waitForFinished();
-    delete process;
+    QProcess *process = processMap.value(item, nullptr);
+    if (process != nullptr) {
+        processToWidgetItem.remove(process);
+        processMap.remove(item);
+        process->disconnect();
+        process->kill();
+        process->waitForFinished();
+        process->deleteLater();
+    }
 
     itemData[item].clear();
     itemData[item] << name << host << sshPort << user << locPort << extIP << extPort;
@@ -338,7 +338,7 @@ void MainWindow::itemModified(QTreeWidgetItem *item, QString name, QString host,
     process = new QProcess;
     processToWidgetItem[process] = item;
     QObject::connect(process, &QProcess::started, this, &MainWindow::onTunnelStart);
-    QObject::connect(process, QOverload<int>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
+    QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
     process->start(plinkOpenSSH, plinkOpenSSH_args);
 
     processMap[item] = process;
