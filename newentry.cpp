@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2024 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -46,7 +46,7 @@ void NewEntry::adaptSize()
 
 void NewEntry::entryFailed(QString text)
 {
-    ui->labelError->setText(tr("<span style=\"color: red;\">%1</span>").arg(text));
+    ui->labelError->setText(QString("<span style=\"color: red;\">%1</span>").arg(text));
     ui->labelError->setVisible(true);
     adaptSize();
 }

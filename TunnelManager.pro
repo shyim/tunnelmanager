@@ -1,13 +1,17 @@
 #/*****************************************************************************
 #* tunnelmanager - Simple GUI for SSH Tunnels
 #*
-#* Copyright (C) 2017-2020 Syping
+#* Copyright (C) 2017-2024 Syping
 #* Copyright (C) 2017 Soner Sayakci
 #*
 #* This software may be modified and distributed under the terms
 #* of the MIT license.  See the LICENSE file for details.
 #*
 #*****************************************************************************/
+
+lessThan(QT_MAJOR_VERSION, 6) {
+    error("Qt6 is required to build tunnelmanager")
+}
 
 QT += core gui widgets
 
@@ -39,7 +43,7 @@ FORMS += \
 RESOURCES += \
     res.qrc \
     lang/tm_tr.qrc \
-    lang/tr_qt5.qrc
+    lang/tr_qt6.qrc
 
 TRANSLATIONS += \
     lang/tm_de.ts

@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2021 Syping
+* Copyright (C) 2017-2024 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -50,7 +50,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->actionQuit->setShortcut(QKeySequence("Alt+F4"));
 
     settings.beginGroup("hosts");
-    for (const QString &name : settings.allKeys()) {
+    const QStringList allKeys = settings.allKeys();
+    for (const QString &name : allKeys) {
         QStringList dataList = settings.value(name, QStringList()).toStringList();
         newEntryAdded(name, dataList.at(0), dataList.at(1), dataList.at(2), dataList.at(3), dataList.at(4), dataList.at(5));
     }
@@ -98,7 +99,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
 
     if (!startup) {
         bool duplicate = false;
-        for (const QStringList &stringList : qAsConst(itemData)) {
+        for (const QStringList &stringList : std::as_const(itemData)) {
             if (stringList.length() >= 1) {
                 if (name == stringList.at(0)) {
                     duplicate = true;
@@ -121,7 +122,7 @@ void MainWindow::newEntryAdded(QString name, QString host, QString sshPort, QStr
     itemData[newItem] << name << host << sshPort << user << locPort << extIP << extPort;
 
     newItem->setText(0, tr("Not Running"));
-    newItem->setTextColor(0, QColor("red"));
+    newItem->setForeground(0, QBrush(Qt::red, Qt::SolidPattern));
     newItem->setText(1, name);
     newItem->setText(2, host);
     newItem->setText(3, locPort);
@@ -155,20 +156,21 @@ MainWindow::~MainWindow()
 #endif
     settings.beginGroup("hosts");
     QStringList nameList;
-    for (const QStringList &stringList : qAsConst(itemData)) {
+    for (const QStringList &stringList : std::as_const(itemData)) {
         QStringList dataList = stringList;
         dataList.removeFirst();
         settings.setValue(stringList.at(0), dataList);
         nameList << stringList.at(0);
     }
-    for (const QString &name : settings.allKeys()) {
+    const QStringList allKeys = settings.allKeys();
+    for (const QString &name : allKeys) {
         if (!nameList.contains(name))
             settings.remove(name);
     }
     settings.endGroup();
 
     // stop runing Plink/OpenSSH
-    for (QProcess *plinkOpenSSH : qAsConst(processMap)) {
+    for (QProcess *plinkOpenSSH : std::as_const(processMap)) {
         QObject::disconnect(plinkOpenSSH, &QProcess::started, this, &MainWindow::onTunnelStart);
         QObject::disconnect(plinkOpenSSH, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished), this, &MainWindow::onTunnelCrash);
         plinkOpenSSH->kill();
@@ -245,7 +247,8 @@ QVector<QString> MainWindow::buildPlinkOpenSSHOptions(const QString &exec, const
 
 void MainWindow::on_buttonDelete_clicked()
 {
-    for (QTreeWidgetItem *item : ui->treeWidget->selectedItems()) {
+    const QList<QTreeWidgetItem*> selectedItems = ui->treeWidget->selectedItems();
+    for (QTreeWidgetItem *item : selectedItems) {
         deleteTreeWidgetItem(item);
     }
 }
@@ -287,19 +290,21 @@ void MainWindow::onTunnelStart()
     QProcess *process = static_cast<QProcess*>(sender());
 
     processToWidgetItem[process]->setText(0, tr("Running"));
-    processToWidgetItem[process]->setTextColor(0, QColor("green"));
+    processToWidgetItem[process]->setForeground(0, QBrush(Qt::green, Qt::SolidPattern));
 
     ui->statusBar->showMessage(tr("%1 started").arg(processToWidgetItem[process]->text(1)));
 }
 
 void MainWindow::onTunnelCrash(int exitCode, QProcess::ExitStatus exitStatus)
 {
+    Q_UNUSED(exitStatus)
+
     QProcess *process = static_cast<QProcess*>(sender());
 
     ui->statusBar->showMessage(tr("%1 quited with Exit Code %2").arg(processToWidgetItem.value(process)->text(1), QString::number(exitCode)));
 
     processToWidgetItem[process]->setText(0, process->readAllStandardError());
-    processToWidgetItem[process]->setTextColor(0, QColor("red"));
+    processToWidgetItem[process]->setForeground(0, QBrush(Qt::red, Qt::SolidPattern));
 }
 
 void MainWindow::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
@@ -326,7 +331,7 @@ void MainWindow::itemModified(QTreeWidgetItem *item, QString name, QString host,
     itemData[item] << name << host << sshPort << user << locPort << extIP << extPort;
 
     item->setText(0, tr("Not Running"));
-    item->setTextColor(0, QColor("red"));
+    item->setForeground(0, QBrush(Qt::red, Qt::SolidPattern));
     item->setText(1, name);
     item->setText(2, host);
     item->setText(3, locPort);

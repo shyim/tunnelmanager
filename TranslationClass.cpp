@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2024 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -22,11 +22,7 @@
 #include <QFile>
 #include <QDir>
 
-#if QT_VERSION >= 0x050000
 #define QtBaseTranslationFormat "qtbase_"
-#else
-#define QtBaseTranslationFormat "qt_"
-#endif
 
 TranslationClass TranslationClass::translationClassInstance;
 
@@ -55,7 +51,7 @@ void TranslationClass::loadTranslation(QApplication *app)
         {
             app->installTranslator(&inQtTranslator);
         }
-        QLocale::setDefault(currentLanguage);
+        QLocale::setDefault(QLocale(currentLanguage));
         isLangLoaded = true;
         return;
     }
@@ -139,7 +135,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-            QLocale::setDefault(currentLanguage);
+            QLocale::setDefault(QLocale(currentLanguage));
             isLangLoaded = true;
         }
     }
@@ -168,7 +164,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-            QLocale::setDefault(currentLanguage);
+            QLocale::setDefault(QLocale(currentLanguage));
             isLangLoaded = true;
         }
         else
@@ -187,7 +183,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-            QLocale::setDefault(currentLanguage);
+            QLocale::setDefault(QLocale(currentLanguage));
             isLangLoaded = true;
         }
     }
@@ -211,7 +207,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-            QLocale::setDefault(currentLanguage);
+            QLocale::setDefault(QLocale(currentLanguage));
             isLangLoaded = true;
         }
         else if (!trLoadSuccess)
@@ -228,7 +224,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-            QLocale::setDefault(currentLanguage);
+            QLocale::setDefault(QLocale(currentLanguage));
             isLangLoaded = true;
         }
     }

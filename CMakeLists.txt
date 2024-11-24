@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(tunnelmanager LANGUAGES CXX)
 
@@ -8,11 +8,11 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS LinguistTools QUIET)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+find_package(Qt6 COMPONENTS LinguistTools QUIET)
 
 if(WIN32)
     list(APPEND TUNNELMANAGER_DEFINES
@@ -50,8 +50,8 @@ list(APPEND TUNNELMANAGER_RESOURCES
     res.qrc
 )
 
-if(Qt5LinguistTools_FOUND)
-    qt5_add_translation(TUNNELMANAGER_TRANSLATIONS
+if(Qt6LinguistTools_FOUND)
+    qt6_add_translation(TUNNELMANAGER_TRANSLATIONS
         lang/tm_de.ts
     )
     add_custom_target(translations DEPENDS ${TUNNELMANAGER_TRANSLATIONS})
@@ -69,7 +69,7 @@ if(QCONF_BUILD)
 else()
     list(APPEND TUNNELMANAGER_RESOURCES
         lang/tm_tr.qrc
-        lang/tr_qt5.qrc
+        lang/tr_qt6.qrc
     )
 endif()
 
@@ -103,16 +103,14 @@ add_executable(tunnelmanager
     ${TUNNELMANAGER_RESOURCES}
 )
 
-if(Qt5LinguistTools_FOUND AND QCONF_BUILD)
+if(Qt6LinguistTools_FOUND AND QCONF_BUILD)
     add_dependencies(tunnelmanager translations)
 endif()
 
-if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.16.0")
-    target_precompile_headers(tunnelmanager PRIVATE config.h)
-endif()
+target_precompile_headers(tunnelmanager PRIVATE config.h)
 
 target_compile_definitions(tunnelmanager PRIVATE ${TUNNELMANAGER_DEFINES})
-target_link_libraries(tunnelmanager PRIVATE Qt5::Widgets ${TUNNELMANAGER_LIBS})
+target_link_libraries(tunnelmanager PRIVATE Qt6::Widgets ${TUNNELMANAGER_LIBS})
 
 install(TARGETS tunnelmanager DESTINATION bin)
 install(FILES de.shyim.tunnelmanager.desktop DESTINATION share/applications)

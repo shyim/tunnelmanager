@@ -44,7 +44,7 @@
 #endif
 
 #ifndef TM_COPYRIGHT
-#define TM_COPYRIGHT "2017-2021"
+#define TM_COPYRIGHT "2017-2024"
 #endif
 
 #ifndef TM_APPVER

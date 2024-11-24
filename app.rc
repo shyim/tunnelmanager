@@ -27,7 +27,7 @@ BEGIN
             VALUE   "FileDescription",  "TunnelManager\0"
             VALUE   "FileVersion",      "0.3.0\0"
             VALUE   "InternalName",     "TunnelManager\0"
-            VALUE   "LegalCopyright",   "Copyright © 2017-2021 Shyim\0"
+            VALUE   "LegalCopyright",   "Copyright © 2017-2024 Shyim\0"
             VALUE   "OriginalFilename", "TunnelManager.exe\0"
             VALUE   "ProductName",      "SSH Tunnel Manager\0"
             VALUE   "ProductVersion",   "0.3.0\0"

@@ -1,7 +1,7 @@
 /*****************************************************************************
 * tunnelmanager - Simple GUI for SSH Tunnels
 *
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2024 Syping
 * Copyright (C) 2017 Soner Sayakci
 *
 * This software may be modified and distributed under the terms
@@ -12,7 +12,6 @@
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
-#include <QDesktopWidget>
 #include <QLibraryInfo>
 #include <QApplication>
 #include <QFileInfo>
@@ -56,8 +55,13 @@ QString AppEnv::convertBuildedString(const QString &buildedStr)
     outputStr.replace("APPDIRNAME:", QString::fromUtf8(TM_APPDIRSTR));
     outputStr.replace("SHAREDDIR:", QString::fromUtf8(TM_SHARE));
     outputStr.replace("RUNDIR:", QFileInfo(QApplication::applicationFilePath()).canonicalPath());
+#if QT_VERSION >= 0x060000
+    outputStr.replace("QCONFLANG:", QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    outputStr.replace("QCONFPLUG:", QLibraryInfo::path(QLibraryInfo::PluginsPath));
+#else
     outputStr.replace("QCONFLANG:", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     outputStr.replace("QCONFPLUG:", QLibraryInfo::location(QLibraryInfo::PluginsPath));
+#endif
     outputStr.replace("SEPARATOR:", QDir::separator());
     return outputStr;
 }
